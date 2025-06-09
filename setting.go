@@ -32,7 +32,7 @@ func setting(token string) *app.Setting {
 		Sniper: app.Sniper{
 			Schedulle: 1 * time.Hour, // periodic for check new token
 			Filter: domain.DexScreening{
-				TH:        1.5, // treshold new token created
+				Listing:   1.5, // treshold new token created
 				Liquidity: "25k",
 				Volume:    "15k",
 				UP:        25,  //%
