@@ -1,13 +1,13 @@
 #sniper
 {
-    "th":3.5,
+    "listing":3.5,
     "liquidity":"5k",
     "volume":"2k",
     "up":25,
     "bsr":1.2
 }
 
-th         -> treshold new token created, in hours
+listing    -> listing token (treshold new token created, in hours)
 liquidity  -> usd
 volume 1h  -> usd
 up         -> up percentage priceChange (%)
