@@ -22,7 +22,7 @@ func (a *apps) chatbot(ctx context.Context) error {
 			}
 
 			// response default
-			if (strings.HasPrefix(payload.Content, "hi") || strings.HasPrefix(payload.Content, "hai")) && len(payload.Content) < 3 {
+			if (strings.HasPrefix(payload.Content, "hi") || strings.HasPrefix(payload.Content, "hai")) && len(payload.Content) <= 3 {
 				logger.Trace("[chatbot] default  :", "match hi")
 				if err := a.repoDisc.Send(payload.ChannelID, "hallo saya QAi ... 👋"); err != nil {
 					logger.Level("error", "chatbot", "[OnGocap] failed Send match->"+err.Error())
