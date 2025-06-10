@@ -12,7 +12,7 @@ func Test_GeckoInfo_1(t *testing.T) {
 	repo := gecko.NewRepo()
 	data, err := repo.GeckoInfo("bitcoin")
 	if err != nil {
-		logger.Level("fatal", "Test", fmt.Sprintf("GeckoInfo: %v", err))
+		t.Fatalf("GeckoInfo: %v", err)
 	}
 
 	js, _ := json.MarshalIndent(data, "", "  ")
@@ -23,7 +23,7 @@ func Test_GeckoList_1D(t *testing.T) {
 	repo := gecko.NewRepo()
 	data, err := repo.GeckoList(5, 2)
 	if err != nil {
-		logger.Level("fatal", "Test", fmt.Sprintf("GeckoInfo: %v", err))
+		t.Fatalf("GeckoList: %v", err)
 	}
 
 	js, _ := json.MarshalIndent(data, "", "  ")

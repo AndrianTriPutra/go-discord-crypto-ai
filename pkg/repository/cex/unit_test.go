@@ -13,7 +13,7 @@ func Test_LastPrice(t *testing.T) {
 	repo := cex.NewRepo()
 	price, err := repo.LastPrice("")
 	if err != nil {
-		logger.Level("fatal", "Test", err.Error())
+		t.Fatalf("LastPrice: %v", err)
 	}
 	js, _ := json.MarshalIndent(price, "", " ")
 	logger.Trace("price:", string(js))
@@ -23,7 +23,7 @@ func Test_Candle_1(t *testing.T) {
 	repo := cex.NewRepo()
 	raw, err := repo.GetCandle("", "1month")
 	if err != nil {
-		logger.Level("fatal", "Test", err.Error())
+		t.Fatalf("GetCandle: %v", err)
 	}
 	for _, row := range raw {
 		js, _ := json.MarshalIndent(row, "", " ")

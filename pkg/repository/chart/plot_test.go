@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"godibot-atp/pkg/repository/chart"
 	"godibot-atp/pkg/utils/domain"
-	"godibot-atp/pkg/utils/logger"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -931,10 +930,10 @@ func Test_Chart_1D(t *testing.T) {
 	// ctx := context.Background()
 	var candles []domain.Candle
 	if err := json.Unmarshal([]byte(payload), &candles); err != nil {
-		logger.Level("fatal", "Test", "unmarshal->"+err.Error())
+		t.Fatalf("Unmarshal: %v", err)
 	}
 	if len(candles) <= 0 {
-		logger.Level("fatal", "Test", "no Have cadles")
+		t.Fatal("no Have cadles")
 	}
 
 	_, b, _, _ := runtime.Caller(0)
@@ -945,7 +944,7 @@ func Test_Chart_1D(t *testing.T) {
 	repo := chart.NewRepo()
 	ts := time.Now()
 	if err := repo.GenerateChart(ts, "1month", path, candles); err != nil {
-		logger.Level("fatal", "Test", "GenerateChart->"+err.Error())
+		t.Fatalf("GenerateChart: %v", err)
 	}
 
 }

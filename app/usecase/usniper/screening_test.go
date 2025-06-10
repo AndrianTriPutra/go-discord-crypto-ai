@@ -6,7 +6,6 @@ import (
 	"godibot-atp/pkg/repository/dex"
 	"godibot-atp/pkg/repository/discord"
 	"godibot-atp/pkg/utils/domain"
-	"godibot-atp/pkg/utils/logger"
 	"testing"
 )
 
@@ -19,7 +18,7 @@ func Test_Screening_1L(t *testing.T) {
 	repoDex := dex.NewRepo()
 	repoDisc, err := discord.NewRepo(token, channelID)
 	if err != nil {
-		logger.Level("fatal", "discord.NewRepo", err.Error())
+		t.Fatalf("discord.NewRepo: %v", err)
 	}
 
 	ucase := usniper.NewUsecase(repoDisc, repoDex)
@@ -40,7 +39,7 @@ func Test_Screening_1L(t *testing.T) {
 
 	err = ucase.Scaning(ctx, channel, payload)
 	if err != nil {
-		logger.Level("fatal", "Scaning", err.Error())
+		t.Fatalf("Scaning: %v", err)
 	}
 
 }

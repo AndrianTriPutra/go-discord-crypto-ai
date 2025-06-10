@@ -9,7 +9,6 @@ import (
 	"godibot-atp/pkg/repository/discord"
 	"godibot-atp/pkg/repository/technical"
 	"godibot-atp/pkg/utils/domain"
-	"godibot-atp/pkg/utils/logger"
 
 	"testing"
 )
@@ -933,10 +932,10 @@ func Test_Analysis_1A(t *testing.T) {
 	ctx := context.Background()
 	var candles []domain.Candle
 	if err := json.Unmarshal([]byte(payload), &candles); err != nil {
-		logger.Level("fatal", "Test", "unmarshal->"+err.Error())
+		t.Fatalf("Unmarshal: %v", err)
 	}
 	if len(candles) <= 0 {
-		logger.Level("fatal", "Test", "no Have cadles")
+		t.Fatal("no Have cadles")
 	}
 
 	repoCex := cex.NewRepo()
@@ -947,10 +946,11 @@ func Test_Analysis_1A(t *testing.T) {
 	chanID := ""
 	repoDisc, err := discord.NewRepo(token, channelID)
 	if err != nil {
-		logger.Level("fatal", "discord.NewRepo", err.Error())
+		t.Fatalf("discord.NewRepo: %v", err)
 	}
+
 	ucase := utechnical.NewUsecase(repoDisc, repoCex, repoTA, repoChart)
 	if err := ucase.Analysis(ctx, chanID, candles); err != nil {
-		logger.Level("fatal", "Test", "analysis->"+err.Error())
+		t.Fatalf("analysis: %v", err)
 	}
 }

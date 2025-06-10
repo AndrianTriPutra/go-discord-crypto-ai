@@ -2,7 +2,6 @@ package discord_test
 
 import (
 	"godibot-atp/pkg/repository/discord"
-	"godibot-atp/pkg/utils/logger"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -22,11 +21,11 @@ func Test_SendText_1A(t *testing.T) {
 
 	repo, err := discord.NewRepo(token, channelID)
 	if err != nil {
-		logger.Level("fatal", "NewRepo", err)
+		t.Fatalf("NewRepo: %v", err)
 	}
 
 	if err := repo.Send(channelID["general"], "test"); err != nil {
-		logger.Level("fatal", "Send", err)
+		t.Fatalf("Send: %v", err)
 	}
 }
 
@@ -43,7 +42,7 @@ func Test_SendImg_1A(t *testing.T) {
 
 	repo, err := discord.NewRepo(token, channelID)
 	if err != nil {
-		logger.Level("fatal", "NewRepo", err)
+		t.Fatalf("NewRepo: %v", err)
 	}
 
 	_, b, _, _ := runtime.Caller(0)
@@ -52,6 +51,6 @@ func Test_SendImg_1A(t *testing.T) {
 	path := base + ".chart/BTC-USDT.png"
 
 	if err := repo.SendImage(channelID["go-trade"], path); err != nil {
-		logger.Level("fatal", "Send", err)
+		t.Fatalf("SendImage: %v", err)
 	}
 }

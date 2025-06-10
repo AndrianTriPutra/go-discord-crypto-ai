@@ -17,7 +17,7 @@ type repo struct {
 }
 
 type RepositoryI interface {
-	Tending() (*[]domain.TokenProfile, error)
+	Trending() (*[]domain.TokenProfile, error)
 	Search(addr string) (*[]domain.TokenPair, error)
 }
 
